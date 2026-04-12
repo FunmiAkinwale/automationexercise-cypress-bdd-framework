@@ -1,0 +1,32 @@
+{
+  "newUser": {
+    "name": "Funmilayo Akinwale",
+    "email": "akinwalefunmilayor@gmail.com",
+    "password": "Password1@",
+    "firstName": "Auto",
+    "lastName": "Tester",
+    "company": "Test Corp",
+    "address": "123 Test Street",
+    "address2": "Suite 100",
+    "country": "United States",
+    "state": "California",
+    "city": "Los Angeles",
+    "zipcode": "90001",
+    "mobileNumber": "1234567890"
+  },
+  "existingUser": {
+    "email": "akinwalefunmilayor@gmail.com",
+    "password": "Password1@"
+  },
+  "payment": {
+    "cardName": "Auto Tester",
+    "cardNumber": "4111111111111111",
+    "cvc": "123",
+    "expiryMonth": "12",
+    "expiryYear": "2028"
+  },
+  "product": {
+    "searchTerm": "Blue Top",
+    "productName": "Blue Top"
+  }
+}

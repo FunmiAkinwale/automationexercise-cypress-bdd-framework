@@ -1,0 +1,34 @@
+{
+  "name": "cypress-bdd-automation",
+  "version": "1.0.0",
+  "description": "Cypress BDD + POM framework for automationexercise.com",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:headed": "cypress run --headed",
+    "test": "cypress run",
+    "test:report": "cypress run && npm run report:generate",
+    "report:generate": "node cypress/support/generateReport.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "cypress": "^13.6.0",
+    "@badeball/cypress-cucumber-preprocessor": "^20.0.0",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
+    "esbuild": "^0.20.0",
+    "multiple-cucumber-html-reporter": "^3.4.0"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": false,
+    "stepDefinitions": "cypress/support/step_definitions/**/*.js",
+    "html": {
+      "enabled": true,
+      "output": "cypress/reports/cucumber-html/index.html"
+    },
+    "json": {
+      "enabled": true,
+      "output": "cypress/reports/cucumber-json/results.json"
+    }
+  }
+}
