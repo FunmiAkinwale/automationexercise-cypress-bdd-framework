@@ -19,7 +19,7 @@ class CheckoutPage extends BasePage {
   get expiryMonthInput() { return "input[data-qa='expiry-month']"; }
   get expiryYearInput() { return "input[data-qa='expiry-year']"; }
   get payAndConfirmButton() { return "button[data-qa='pay-button']"; }
-  get orderSuccessMsg() { return "h2[data-qa='order-placed'], #success_message, p:contains('Congratulations')"; }
+  get orderSuccessMsg() { return "h2[data-qa='order-placed'], p:contains('Congratulations! Your order has been confirmed!')"; }
   get downloadInvoiceBtn() { return "a.btn:contains('Download Invoice')"; }
   get continueButton() { return "a[data-qa='continue-button']"; }
 
@@ -34,32 +34,34 @@ class CheckoutPage extends BasePage {
   }
 
   addOrderComment(comment) {
-    this.typeText(this.orderComment, comment);
+    // Use first() in case textarea appears more than once in DOM
+    cy.get(this.orderComment).first().clear().type(comment);
   }
 
   clickPlaceOrder() {
-    this.clickElement(this.placeOrderButton);
+    // Use first() to avoid multiple element error
+    cy.get(this.placeOrderButton).first().should("be.visible").click();
     this.waitForUrl("/payment");
   }
 
   fillPaymentDetails(payment) {
-    this.typeText(this.cardNameInput, payment.cardName);
-    this.typeText(this.cardNumberInput, payment.cardNumber);
-    this.typeText(this.cvcInput, payment.cvc);
-    this.typeText(this.expiryMonthInput, payment.expiryMonth);
-    this.typeText(this.expiryYearInput, payment.expiryYear);
+    cy.get(this.cardNameInput).should("be.visible").clear().type(payment.cardName);
+    cy.get(this.cardNumberInput).should("be.visible").clear().type(payment.cardNumber);
+    cy.get(this.cvcInput).should("be.visible").clear().type(payment.cvc);
+    cy.get(this.expiryMonthInput).should("be.visible").clear().type(payment.expiryMonth);
+    cy.get(this.expiryYearInput).should("be.visible").clear().type(payment.expiryYear);
   }
 
   confirmPayment() {
-    this.clickElement(this.payAndConfirmButton);
+    cy.get(this.payAndConfirmButton).first().should("be.visible").click();
   }
 
   verifyOrderSuccess() {
-    cy.get(this.orderSuccessMsg, { timeout: 15000 }).should("be.visible");
+    cy.get(this.orderSuccessMsg, { timeout: 15000 }).first().should("be.visible");
   }
 
   clickContinueAfterOrder() {
-    this.clickElement(this.continueButton);
+    cy.get(this.continueButton).first().should("be.visible").click();
   }
 }
 

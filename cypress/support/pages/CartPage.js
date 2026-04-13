@@ -11,6 +11,7 @@ class CartPage extends BasePage {
   get cartPrices() { return ".cart_price p"; }
   get totalPrice() { return ".cart_total_price"; }
   get checkoutButton() { return "a.btn.btn-default.check_out"; }
+  get checkoutButton2() { return ".col-sm-6 > .btn"; }
   get emptyCartMsg() { return "#empty_cart"; }
   get deleteItemButtons() { return ".cart_quantity_delete"; }
 
@@ -32,7 +33,8 @@ class CartPage extends BasePage {
   }
 
   proceedToCheckout() {
-    this.clickElement(this.checkoutButton);
+    cy.get(this.checkoutButton).first().should("be.visible").click();
+    this.waitForUrl("/checkout");
   }
 
   removeFirstItem() {

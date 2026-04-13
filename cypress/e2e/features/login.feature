@@ -11,7 +11,7 @@ Feature: User Login
   Scenario: Successful login with valid credentials
     When I navigate to the login page
     And I login with valid email and password
-    Then I should be logged in as "Auto Tester"
+    Then I should be logged in as "Funmilayo Akinwale"
     And the navigation should show my username
 
   @negative

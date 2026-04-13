@@ -10,10 +10,10 @@ Feature: User Sign-up
   @smoke @positive
   Scenario: Successful new user registration
     When I navigate to the login page
-    And I enter new user signup details with name "Auto Tester" and a unique email
+    And I enter new user signup details with name "Funmilayo Akinwale" and a unique email
     And I fill in the registration form with valid details
     Then my account should be created successfully
-    And I should be logged in as "Auto Tester"
+    And I should be logged in as "Funmilayo Akinwale"
 
   @negative
   Scenario: Sign-up with an already registered email

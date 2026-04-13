@@ -18,7 +18,7 @@ module.exports = defineConfig({
     defaultCommandTimeout: 10000,
     pageLoadTimeout: 30000,
     retries: {
-      runMode: 2,
+      runMode: 1,
       openMode: 0,
     },
     async setupNodeEvents(on, config) {

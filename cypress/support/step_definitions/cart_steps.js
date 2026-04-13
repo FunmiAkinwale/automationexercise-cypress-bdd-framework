@@ -4,7 +4,6 @@ const {
 } = require("@badeball/cypress-cucumber-preprocessor");
 const productsPage = require("../pages/ProductsPage");
 const cartPage = require("../pages/CartPage");
-const homePage = require("../pages/HomePage");
 
 When("I add the first available product to the cart", () => {
   productsPage.addFirstProductToCart();
@@ -24,10 +23,10 @@ When("I click View Cart", () => {
 
 When("I search for product {string}", (productName) => {
   productsPage.searchProduct(productName);
+  productsPage.verifySearchResults(productName);
 });
 
 Then("the cart icon should reflect items added", () => {
-  // Verify cart badge / link is visible and not zero
   cy.get("a[href='/view_cart']").should("be.visible");
 });
 
@@ -36,5 +35,5 @@ Then("the cart should contain {string}", (productName) => {
 });
 
 Then("the cart should have at least {int} items", (minCount) => {
-  cy.get(cartPage.cartItems).should("have.length.gte", minCount);
+  cy.get(cartPage.cartItems).its("length").should("be.gte", minCount);
 });

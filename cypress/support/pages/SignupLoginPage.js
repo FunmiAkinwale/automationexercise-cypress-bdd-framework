@@ -80,7 +80,7 @@ class SignupLoginPage extends BasePage {
   verifyAccountCreated() {
     cy.get(this.accountCreatedHeading)
       .should("be.visible")
-      .and("contain.text", "ACCOUNT CREATED!");
+      .and("contain.text", "Account Created!");
   }
 
   clickContinueAfterSignup() {
