@@ -28,7 +28,7 @@
     },
     "json": {
       "enabled": true,
-      "output": "cypress/reports/cucumber-json/results.json"
+      "output": "cypress/reports/cucumber-json/[name]].json"
     }
   }
 }
