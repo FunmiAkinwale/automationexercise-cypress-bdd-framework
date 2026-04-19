@@ -1,23 +1,23 @@
 {
-  "newUser": {
-    "name": "Funmilayo Akinwale",
-    "email": "akinwalefunmilayor@gmail.com",
-    "password": "Password1@",
-    "firstName": "Auto",
-    "lastName": "Tester",
-    "company": "Test Corp",
-    "address": "123 Test Street",
-    "address2": "Suite 100",
-    "country": "United States",
-    "state": "California",
-    "city": "Los Angeles",
-    "zipcode": "90001",
-    "mobileNumber": "1234567890"
-  },
-  "existingUser": {
-    "email": "akinwalefunmilayor@gmail.com",
-    "password": "Password1@"
-  },
+"newUser": {
+  "name": "Funmilayo Akinwale",
+  "email": "akinwalefunmilayor@gmail.com",
+  "password": "Password1@",
+  "firstName": "Funmilayo",
+  "lastName": "Akinwale",
+  "company": "test",
+  "address": "no 1 kogbejo street",
+  "address2": "",
+  "country": "India",
+  "state": "lagos",
+  "city": "bagklok lagos",
+  "zipcode": "1000000",
+  "mobileNumber": "07063020433"
+},
+"existingUser": {
+  "email": "akinwalefunmilayor@gmail.com",
+  "password": "Password1@"
+},
   "payment": {
     "cardName": "Auto Tester",
     "cardNumber": "4111111111111111",

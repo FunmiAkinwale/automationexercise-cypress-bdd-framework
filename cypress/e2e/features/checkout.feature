@@ -14,13 +14,13 @@ Feature: Checkout Functionality
     And I add the first available product to the cart
     And I click View Cart
     And I click Proceed to Checkout from the cart
-    Then I should be on the checkout review page
-    And I should see my delivery address details
-    And I should see the order summary with items
-    When I add a checkout comment "Please leave at door"
-    And I place the order
-    And I enter valid payment details
-    Then my order should be completed successfully
+    Then I should see my delivery address details
+    And I should see the order summary
+    When I add a comment "Please leave at door"
+    And I click Place Order
+    And I fill in valid payment details
+    And I confirm the payment
+    Then my order should be placed successfully
 
   @positive
   Scenario: Verify order summary shows correct items before placing order
@@ -28,8 +28,8 @@ Feature: Checkout Functionality
     And I add the first available product to the cart
     And I click View Cart
     And I click Proceed to Checkout from the cart
-    Then I should be on the checkout review page
-    And I should see the order summary with items
+    Then I should see my delivery address details
+    And I should see the order summary
 
   @positive
   Scenario: Verify checkout works with multiple products
@@ -39,5 +39,5 @@ Feature: Checkout Functionality
     And I add the second available product to the cart
     And I click View Cart
     And I click Proceed to Checkout from the cart
-    Then I should be on the checkout review page
-    And I should see the order summary with items
+    Then I should see my delivery address details
+    And I should see the order summary

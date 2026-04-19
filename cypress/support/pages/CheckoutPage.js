@@ -2,26 +2,44 @@ const BasePage = require("./BasePage");
 
 /**
  * CheckoutPage
- * Covers the checkout address confirmation, order review, and payment.
+ * Site: https://automationexercise.com
+ * Full flow: Cart → Checkout → Payment → Order Confirmation
  */
 class CheckoutPage extends BasePage {
-  // Checkout - address & review
-  get deliveryAddressSection() { return "#address_delivery"; }
-  get billingAddressSection() { return "#address_invoice"; }
-  get orderProducts() { return "#cart_info tbody tr"; }
-  get orderComment() { return "textarea.form-control"; }
-  get placeOrderButton() { return "a.btn.btn-default.check_out"; }
 
-  // Payment page
-  get cardNameInput() { return "input[data-qa='name-on-card']"; }
-  get cardNumberInput() { return "input[data-qa='card-number']"; }
-  get cvcInput() { return "input[data-qa='cvc']"; }
-  get expiryMonthInput() { return "input[data-qa='expiry-month']"; }
-  get expiryYearInput() { return "input[data-qa='expiry-year']"; }
-  get payAndConfirmButton() { return "button[data-qa='pay-button']"; }
-  get orderSuccessMsg() { return "h2[data-qa='order-placed'], p:contains('Congratulations! Your order has been confirmed!')"; }
-  get downloadInvoiceBtn() { return "a.btn:contains('Download Invoice')"; }
-  get continueButton() { return "a[data-qa='continue-button']"; }
+  // ── Cart page ─────────────────────────────────────────────────────────────
+  get proceedToCheckoutBtn() { return "a.btn.btn-default.check_out"; }
+
+  // ── Checkout page - Address & Order Review ────────────────────────────────
+  get deliveryAddressSection() { return "#address_delivery"; }
+  get billingAddressSection()  { return "#address_invoice"; }
+  get orderProducts()          { return "#cart_info tbody tr"; }
+  get orderCommentBox()        { return "textarea.form-control"; }
+  get placeOrderButton()       { return "a.btn.btn-default.check_out"; }
+
+  // ── Payment page ──────────────────────────────────────────────────────────
+  get cardNameInput()          { return "input[data-qa='name-on-card']"; }
+  get cardNumberInput()        { return "input[data-qa='card-number']"; }
+  get cvcInput()               { return "input[data-qa='cvc']"; }
+  get expiryMonthInput()       { return "input[data-qa='expiry-month']"; }
+  get expiryYearInput()        { return "input[data-qa='expiry-year']"; }
+  get payAndConfirmButton()    { return "button[data-qa='pay-button']"; }
+
+  // ── Order Success page ────────────────────────────────────────────────────
+  get orderSuccessMsg()        { return "h2[data-qa='order-placed'], p:contains('Congratulations! Your order has been confirmed!')"; }
+  get downloadInvoiceBtn()     { return "a.btn:contains('Download Invoice')"; }
+  get continueButton()         { return "a[data-qa='continue-button']"; }
+
+  // ── Actions ───────────────────────────────────────────────────────────────
+
+  /**
+   * Called from cart page — clicks "Proceed To Checkout"
+   * This is the entry point that links the add-to-cart flow to checkout
+   */
+  clickProceedToCheckout() {
+    cy.get(this.proceedToCheckoutBtn).first().should("be.visible").click();
+    cy.url().should("include", "/checkout");
+  }
 
   verifyDeliveryAddress(name) {
     cy.get(this.deliveryAddressSection)
@@ -34,12 +52,10 @@ class CheckoutPage extends BasePage {
   }
 
   addOrderComment(comment) {
-    // Use first() in case textarea appears more than once in DOM
-    cy.get(this.orderComment).first().clear().type(comment);
+    cy.get(this.orderCommentBox).first().clear().type(comment);
   }
 
   clickPlaceOrder() {
-    // Use first() to avoid multiple element error
     cy.get(this.placeOrderButton).first().should("be.visible").click();
     this.waitForUrl("/payment");
   }
@@ -62,6 +78,21 @@ class CheckoutPage extends BasePage {
 
   clickContinueAfterOrder() {
     cy.get(this.continueButton).first().should("be.visible").click();
+  }
+
+  verifyOrderSummaryHasItems() {
+    cy.get(this.orderProducts).should("have.length.greaterThan", 0);
+  }
+
+  placeOrder() {
+    cy.get(this.placeOrderButton).first().should("be.visible").click();
+    this.waitForUrl("/payment");
+  }
+  
+  // ── Convenience method: full payment flow in one call ─────────────────────
+  completePayment(payment) {
+    this.fillPaymentDetails(payment);
+    this.confirmPayment();
   }
 }
 
