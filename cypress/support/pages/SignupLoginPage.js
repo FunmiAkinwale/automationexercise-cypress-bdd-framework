@@ -68,7 +68,9 @@ class SignupLoginPage extends BasePage {
     this.typeText(this.lastNameInput, userData.lastName);
     this.typeText(this.companyInput, userData.company);
     this.typeText(this.addressInput, userData.address);
-    this.typeText(this.address2Input, userData.address2);
+    if (userData.address2) {
+      this.typeText(this.address2Input, userData.address2);
+    }
     this.selectDropdown(this.countrySelect, userData.country);
     this.typeText(this.stateInput, userData.state);
     this.typeText(this.cityInput, userData.city);
